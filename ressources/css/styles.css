@@ -12,10 +12,10 @@
 /* Card styling for mobile */
 .card {
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px var(--my-card-shadow);
   overflow: hidden;
-  margin-bottom: 2.5rem; /* Space between cards in mobile layout */
-  height: 80vh; /* Card height is 80% of viewport height in mobile layout */
+  margin-bottom: 2.5rem;
+  height: 80vh;
 }
 
 .card-content {
@@ -25,51 +25,124 @@
   flex-direction: column;
 }
 
-/* Primary card (top in mobile layout) - white */
+/* Primary card (white) - first in mobile layout */
 .card-primary {
   background-color: var(--my-white);
+  position: relative;
+  overflow: hidden;
+  order: 1;
 }
 
-/* Secondary card (bottom in mobile layout) - blue */
+/* Background image for primary card */
+.card-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/background-rightcard.png");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  transform: rotate(-5deg) scale(1.2) translateX(10%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Ensure content stays above the background */
+.card-primary .card-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Secondary card (blue) - second in mobile layout */
 .card-secondary {
-  background-color: #6a74db; /* The desired background color */
-  color: var(--my-white); /* White text for better contrast */
+  background-color: var(--my-background-color);
+  color: var(--my-white);
+  order: 2;
 }
 
-/* Desktop layout (from 1024px) */
-@media (min-width: 1024px) {
+/* Mobile layout requires flex container */
+.cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Landscape mode for small devices (phones) */
+@media (max-width: 926px) and (orientation: landscape) {
+  .card {
+    height: 120vh; /* Increased height for better content display */
+  }
+  
+  .card-content {
+    padding: 1rem; /* Reduced padding */
+  }
+  
+  /* Adjust container for better fit */
   .container {
-    padding: 2rem; /* Padding from viewport edge */
-    height: calc(100vh - 4rem); /* Full height minus padding */
+    padding: 0.5rem;
+    height: auto;
+    min-height: 100vh;
+  }
+}
+
+/* Desktop layout - ONLY FOR LANDSCAPE ORIENTATION OR LARGE SCREENS */
+@media (min-width: 1024px) and (orientation: landscape), (min-width: 1200px) {
+  .container {
+    padding: 2rem;
+    height: calc(100vh - 4rem);
   }
   
   /* Wrapper for cards in desktop layout */
   .cards-wrapper {
-    display: flex;
-    width: 100%;
+    flex-direction: row;
     height: 100%;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 16px var(--my-cards-shadow);
     border-radius: 8px;
     overflow: hidden;
   }
   
   .card {
-    height: 100%; /* Full height of container */
-    margin-bottom: 0; /* No bottom margin in desktop layout */
-    flex: 1; /* Both cards take equal space */
-    box-shadow: none; /* No shadow for individual cards */
-    border-radius: 0; /* No rounded corners for individual cards */
+    height: 100%;
+    margin-bottom: 0;
+    flex: 1;
+    box-shadow: none;
+    border-radius: 0;
   }
   
+  /* Reset order for desktop layout */
+  .card-primary { order: 2; }
+  .card-secondary { order: 1; }
+  
   /* Larger inner padding for desktop */
-  .card-content {
-    padding: 2.5rem;
+  .card-content { padding: 2.5rem; }
+}
+
+/* Portrait mode for tablets (including iPad Pro) - keep mobile layout */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .container {
+    padding: 1.5rem;
   }
+  
+  .card {
+    height: 45vh; /* Shorter cards for portrait tablets */
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Keep the mobile layout structure */
+  .cards-wrapper {
+    flex-direction: column;
+  }
+  
+  .card-primary { order: 1; }
+  .card-secondary { order: 2; }
 }
 
 /* Additional improvements for larger screens */
 @media (min-width: 1440px) {
   .container {
-    max-width: 1400px; /* Maximum width for very large screens */
+    max-width: 1400px;
   }
 }

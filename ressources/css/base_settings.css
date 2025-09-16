@@ -1,6 +1,6 @@
 /* Root variables - global settings */
 :root {
-    /* Font weights that can be used as classes */
+    /* Font weights */
     --font-weight-light: 300;
     --font-weight-normal: 400;
     --font-weight-bold: 800;
@@ -10,10 +10,12 @@
     font-size: 14px;
 
     /* Color definitions */
-    /* Text colors */
     --my-white: #fff;
     --my-black: #000;
     --my-gray: #5d5d5d;
+    --my-dark-gray: #333333;
+    --my-medium-gray: #555555;
+    --my-light-gray: #f5f5f5;
 
     /* Standard colors */
     --my-background-color: #6a74db;
@@ -23,6 +25,10 @@
     /* Transparent colors */
     --my-strong-transparent: rgba(255, 255, 255, 0.16);
     --my-light-transparent: rgba(255, 255, 255, 0.45);
+    --my-tag-background: rgba(255, 255, 255, 0.2);
+    --my-tag-shadow: rgba(255, 255, 255, 0.5);
+    --my-card-shadow: rgba(0, 0, 0, 0.1);
+    --my-cards-shadow: rgba(0, 0, 0, 0.15);
 }
 
 /* Reset and box model */
@@ -66,78 +72,45 @@
 }
 
 /* Typography base styles */
-b,
-strong {
+b, strong {
     font-weight: var(--font-weight-bold);
 }
 
 /* Font weight utility classes */
-.light {
-    font-weight: var(--font-weight-light);
-}
+.light { font-weight: var(--font-weight-light); }
+.normal { font-weight: var(--font-weight-normal); }
+.bold { font-weight: var(--font-weight-bold); }
+.bolder { font-weight: var(--font-weight-bolder); }
 
-.normal {
-    font-weight: var(--font-weight-normal);
-}
-
-.bold {
-    font-weight: var(--font-weight-bold);
-}
-
-.bolder {
-    font-weight: var(--font-weight-bolder);
-}
-
-/* Heading styles - mobile first with smaller sizes */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+/* Heading styles - mobile first */
+h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.5em;
     font-weight: var(--font-weight-bold);
     line-height: 1.2;
 }
 
-h1 {
-    font-size: 1.8rem;
+h1 { 
+    font-size: 1.8rem; 
     font-weight: var(--font-weight-bolder);
 }
-
-h2 {
-    font-size: 1.5rem;
-}
-
-h3 {
-    font-size: 1.3rem;
-}
-
-h4 {
-    font-size: 1.2rem;
-}
-
-h5 {
-    font-size: 1.1rem;
-}
-
-h6 {
-    font-size: 1rem;
-}
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.3rem; }
+h4 { font-size: 1.2rem; }
+h5 { font-size: 1.1rem; }
+h6 { font-size: 1rem; }
 
 /* Layout structure */
-html,
-body {
+html, body {
     height: 100%;
-    overflow-x: hidden; /* Allow vertical scrolling but prevent horizontal */
+    overflow-x: hidden;
     overflow-y: auto;
 }
 
 body {
     font-family: "Montserrat", sans-serif;
     font-weight: var(--font-weight-normal);
-    background-color: #f5f5f5;
-    padding: 0.5rem; /* Add some padding for mobile */
+    background-color: var(--my-light-gray);
+    padding: 0.5rem;
 }
 
 /* Images should be responsive by default */
@@ -148,63 +121,25 @@ img {
 
 /* Tablet breakpoint */
 @media (min-width: 481px) {
-    :root {
-        font-size: 15px; /* Increase base font size for tablets */
-    }
+    :root { font-size: 15px; }
     
-    h1 {
-        font-size: 2rem;
-    }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.7rem; }
+    h3 { font-size: 1.5rem; }
+    h4 { font-size: 1.3rem; }
     
-    h2 {
-        font-size: 1.7rem;
-    }
-    
-    h3 {
-        font-size: 1.5rem;
-    }
-    
-    h4 {
-        font-size: 1.3rem;
-    }
-    
-    body {
-        padding: 0.75rem;
-    }
+    body { padding: 0.75rem; }
 }
 
 /* Desktop breakpoint */
 @media (min-width: 926px) {
-    :root {
-        font-size: 16px; /* Full base font size for desktops */
-    }
+    :root { font-size: 16px; }
     
-    h1 {
-        font-size: 2.5rem;
-    }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.75rem; }
+    h4 { font-size: 1.5rem; }
+    h5 { font-size: 1.25rem; }
     
-    h2 {
-        font-size: 2rem;
-    }
-    
-    h3 {
-        font-size: 1.75rem;
-    }
-    
-    h4 {
-        font-size: 1.5rem;
-    }
-    
-    h5 {
-        font-size: 1.25rem;
-    }
-    
-    body {
-        padding: 1rem;
-    }
-}
-
-/* Specific desktop breakpoint for our layout (1024px) */
-@media (min-width: 1024px) {
-    /* No specific base settings needed at this breakpoint - layout handled in styles.css */
+    body { padding: 1rem; }
 }
